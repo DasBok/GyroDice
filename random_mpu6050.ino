@@ -24,15 +24,27 @@ void loop() {
 
  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
-unsigned long seedValue = (ax + ay + az);
+  float fax = (float)ax;
+  float fay = (float)ay;
+  float faz = (float)az;
+
+  float fgx = (float)gx;
+  float fgy = (float)gy;
+  float fgz = (float)gz;
+
+ float aSum = sqrt(fax * fax + fay * fay + faz * faz);
+ float gSum = sqrt(fgx * fgx + fgy * fgy + fgz * fgz);
+
+unsigned long seedValue = (aSum + gSum);
 
 int randomNumber = random(1, 21);
 
- Serial.print("Accell: "); Serial.println(az + ay + az);
- Serial.print("Gyro: "); Serial.println(gx + gy + gz);
+ Serial.print("Acc: "); Serial.println(aSum);
+ Serial.print("Gyro: "); Serial.println(gSum);
+ Serial.print("Total: "); Serial.println(aSum + gSum);
 
- Serial.println(randomNumber);
+ Serial.print("D20 Roll: "); Serial.println(randomNumber);
 
- delay(500);
+ delay(1000);
 
 }
