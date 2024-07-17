@@ -75,7 +75,7 @@ void loop() {
     randomSeed(seedValue);
 
     randomNumber = random(1, 21); // RandomNumber generator based on seed value
-    randomC1 = random(1, 150);
+    randomC1 = random(1, 150); // lowed number to have less pure white colours
     randomC2 = random(1, 150);
     randomC3 = random(1, 150);
 
@@ -86,7 +86,7 @@ void loop() {
 
     for(int i = 0; i < NUM_LEDS; i++){
         if(i < randomNumber){
-            strip.setPixelColor(i, strip.Color(randomC1, randomC2, randomC3)); //Set LEDs to red
+            strip.setPixelColor(i, strip.Color(randomC1, randomC2, randomC3)); //Set LEDs to random
         } else {
           strip.setPixelColor(i, strip.Color(0, 0, 0)); //Turn LEDs off
         }
