@@ -4,7 +4,9 @@
 MPU6050 mpu;
 
 const int buttonPin = 2; // Digital Pin for the button
-bool buttonPressed = false;
+bool buttonState = HIGH;
+bool lastButtonState = HIGH;
+bool readOnce = false;
 
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
@@ -31,6 +33,14 @@ void setup() {
 
 void loop() {
 
+buttonState = digitalRead(buttonPin);
+
+if (buttonState == LOW && lastButtonState == HIGH){
+  readOnce = true;
+}
+
+if (readOnce){
+  readOnce = false;
 
 // Read accelerometer and gyroscope values
  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
@@ -57,7 +67,10 @@ int randomNumber = random(1, 21); // RandomNumber generator based on seed value
  Serial.print("Total: "); Serial.println(aSum + gSum); // Debug Output of combined values
 
  Serial.print("D20 Roll: "); Serial.println(randomNumber); // Debug Output of D20 roll
+}
 
- delay(1000);
+lastButtonState = buttonState;
+
+ delay(50);
 
 }
