@@ -7,6 +7,7 @@ const int buttonPin = 2; // Digital Pin for the button
 bool buttonState = HIGH;
 bool lastButtonState = HIGH;
 bool readOnce = false;
+int randomNumber = 0;
 
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
@@ -59,14 +60,16 @@ if (readOnce){
  float gSum = sqrt(fgx * fgx + fgy * fgy + fgz * fgz); // Calculate magnitude of gyroscope vector
 
 unsigned long seedValue = (aSum + gSum); // Seed Value for the RandomNumber
+randomSeed(seedValue);
 
-int randomNumber = random(1, 21); // RandomNumber generator based on seed value
+randomNumber = random(1, 21); // RandomNumber generator based on seed value
 
  Serial.print("Acc: "); Serial.println(aSum); // Debug Output of Acc
  Serial.print("Gyro: "); Serial.println(gSum); // Debug Output of Gyro
  Serial.print("Total: "); Serial.println(aSum + gSum); // Debug Output of combined values
+Serial.print("D20 Roll: "); Serial.println(randomNumber); // Debug Output of D20 roll
 
- Serial.print("D20 Roll: "); Serial.println(randomNumber); // Debug Output of D20 roll
+
 }
 
 lastButtonState = buttonState;
