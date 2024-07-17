@@ -14,6 +14,9 @@ bool buttonState = HIGH;
 bool lastButtonState = HIGH;
 bool readOnce = false;
 int randomNumber = 0;
+int randomC1 = 0;
+int randomC2 = 0;
+int randomC3 = 0;
 
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
@@ -72,6 +75,9 @@ void loop() {
     randomSeed(seedValue);
 
     randomNumber = random(1, 21); // RandomNumber generator based on seed value
+    randomC1 = random(1, 150);
+    randomC2 = random(1, 150);
+    randomC3 = random(1, 150);
 
     Serial.print("Acc: "); Serial.println(aSum); // Debug Output of Acc
     Serial.print("Gyro: "); Serial.println(gSum); // Debug Output of Gyro
@@ -80,7 +86,7 @@ void loop() {
 
     for(int i = 0; i < NUM_LEDS; i++){
         if(i < randomNumber){
-            strip.setPixelColor(i, strip.Color(255, 0, 0)); //Set LEDs to red
+            strip.setPixelColor(i, strip.Color(randomC1, randomC2, randomC3)); //Set LEDs to red
         } else {
           strip.setPixelColor(i, strip.Color(0, 0, 0)); //Turn LEDs off
         }
